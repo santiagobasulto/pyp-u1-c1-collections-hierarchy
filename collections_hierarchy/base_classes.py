@@ -3,6 +3,7 @@ from .node import Node
 
 class Sequenceable(object):
     def __init__(self):
+        "I'm basing my implementation in a start and end node"
         self.start = None
         self.end = None
 
