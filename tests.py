@@ -11,15 +11,18 @@ def test_sequenceable():
     n1 = Node('X')
     n2 = Node('Y')
     n3 = Node('Z')
+    n4 = Node('R')
+    
     n1.next = n2
     n2.next = n3
+    n3.next = n4
 
     sequence = Sequenceable()
     assert sequence.get_elements() == []
     # Warning. Violating encapsulation
     sequence.start = n1
 
-    assert sequence.get_elements() == ['X', 'Y', 'Z']
+    assert sequence.get_elements() == ['X', 'Y', 'Z', 'R']
 
 
 def test_appendable():
@@ -74,7 +77,7 @@ def test_popable():
 
 
 def test_pushable():
-    class TestPushableSequence(Sequenceable, Pushable):
+    class TestPushableSequence(Sequenceable, Pushable, Appendable):
         pass
 
     sequence = TestPushableSequence()
@@ -88,3 +91,6 @@ def test_pushable():
 
     sequence.push('A')
     assert sequence.get_elements() == ['A', 'B', 'C']
+    
+    sequence.append('D')
+    assert sequence.get_elements() == ['A', 'B', 'C', 'D']
